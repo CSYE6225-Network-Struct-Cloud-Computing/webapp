@@ -1,6 +1,6 @@
 # Assignment
 
-### CSYE 6225 - Network Structure & Cloud Computing (Spring 2024)
+### CSYE 6225 - Network Structure And Cloud Computing (Spring 2024)
 
 Omkumar Dhirenbhai Solanki - NUID: 002841552
 
