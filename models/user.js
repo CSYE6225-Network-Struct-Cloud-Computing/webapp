@@ -1,0 +1,65 @@
+const { Model, DataTypes } = require("sequelize");
+const bcrypt = require("bcrypt");
+
+module.exports = (sequelize) => {
+    class User extends Model {
+        async comparePassword(password) {
+            return await bcrypt.compare(password, this.password);
+        }
+    }
+
+    User.init(
+        {
+            id: {
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV1,
+                primaryKey: true,
+                allowNull: false,
+                noUpdate: true,
+                readOnly: true,
+            },
+            firstName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            lastName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            username: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true,
+                validate: {
+                    isEmail: true,
+                },
+            },
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                set(value) {
+                    this.setDataValue("password", value);
+                },
+            },
+            account_created: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                defaultValue: DataTypes.NOW,
+            },
+            account_updated: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                defaultValue: DataTypes.NOW,
+            },
+        },
+        {
+            sequelize,
+            modelName: "User",
+            defaultScope: {
+                attributes: { exclude: ["password"] },
+            },
+        }
+    );
+
+    return User;
+};
