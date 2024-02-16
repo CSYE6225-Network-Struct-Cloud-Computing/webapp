@@ -23,9 +23,10 @@ jobs:
             - name: Create new env file
               run: |
                   touch .env
-                  echo TEST_DB_NAME=${{ secrets.MYSQL_DB_NAME }} >> .env
-                  echo TEST_DB_USER=${{ secrets.MYSQL_USERNAME }}>> .env
-                  echo TEST_DB_PASS=${{ secrets.MYSQL_PASSWORD }} >> .env
+                  echo MYSQL_DB_NAME=${{ secrets.MYSQL_DB_NAME }} >> .env
+                  echo MYSQL_USERNAME=${{ secrets.MYSQL_USERNAME }}>> .env
+                  echo MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> .env
+                  echo PORT=3000
 
             - name: Use Node.js version 21
               uses: actions/setup-node@v3
