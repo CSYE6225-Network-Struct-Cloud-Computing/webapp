@@ -15,5 +15,5 @@ jobs:
             - name: Install Test Dependency
               run: npm i -g -D jest
             - run: npm ci
-            - run: npm test
+            # - run: npm test
             - run: echo Hello, World!

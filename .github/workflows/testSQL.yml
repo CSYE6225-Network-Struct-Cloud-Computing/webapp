@@ -1,0 +1,42 @@
+name: testSQL
+
+on: [pull_request]
+
+jobs:
+    server-api:
+        runs-on: ubuntu-latest
+        services:
+            mysql:
+                image: mysql:5.7
+                env:
+                    MYSQL_DATABASE: ${{ secrets.MYSQL_DB_NAME }}
+                    MYSQL_USER: ${{ secrets.MYSQL_USERNAME }}
+                    MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+                    MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+                ports:
+                    - 3306:3306
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Create new env file
+              run: |
+                  touch .env
+                  echo TEST_DB_NAME=${{ secrets.MYSQL_DB_NAME }} >> .env
+                  echo TEST_DB_USER=${{ secrets.MYSQL_USERNAME }}>> .env
+                  echo TEST_DB_PASS=${{ secrets.MYSQL_PASSWORD }} >> .env
+
+            - name: Use Node.js version 21
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "21.x"
+
+            - name: Run npm Install command
+              run: npm ci
+
+            - name: Install Test Dependencies command
+              run: npm i -g -D jest supertest
+
+            - name: Run api test command
+              run: npm test
