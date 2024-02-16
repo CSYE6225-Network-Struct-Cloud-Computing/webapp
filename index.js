@@ -21,6 +21,6 @@ db.sequelize
         console.log("Error connecting to database : ", error);
     });
 
-app.listen(process.env.PORT, () => {
-    console.log("Server is Running on Port :", process.env.PORT);
+app.listen(process.env.PORT || 3000, () => {
+    console.log("Server is Running on Port :", process.env.PORT || 3000);
 });
