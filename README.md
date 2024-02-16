@@ -19,7 +19,7 @@ net start MySQL80
 
 To Run locally : npm run dev or node index.js
 
-Dependencies used:
+Dependencies used :
 
 "dependencies": {
         "basic-auth": "^2.0.1",
