@@ -37,7 +37,13 @@ const checkDatabaseConnectivityAndCreation = async () => {
     }
 };
 
-checkDatabaseConnectivityAndCreation();
+const closeSequelizeSQLDatabaseConnection = async () => {
+    try {
+        await db.sequelize.close();
+    } catch (error) {}
+};
+
+// checkDatabaseConnectivityAndCreation();
 
 // async function initializeApp() {
 //     try {
@@ -106,5 +112,7 @@ Object.keys(db).forEach((modelName) => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+db.checkDatabaseConnectivityAndCreation = checkDatabaseConnectivityAndCreation;
+db.closeSequelizeSQLDatabaseConnection = closeSequelizeSQLDatabaseConnection;
 
 module.exports = db;

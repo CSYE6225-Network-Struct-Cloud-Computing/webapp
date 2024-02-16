@@ -19,13 +19,19 @@ async function basicAuth(req, res, next) {
         "ascii"
     );
     const [username, password] = credentials.split(":");
-    console.log(username);
-    console.log(password);
+    // console.log(username);
+    // console.log(password);
 
     try {
         const user = await User.findOne({
             where: { username: username },
-            attributes: ["id", "username", "password", "firstName", "lastName"],
+            attributes: [
+                "id",
+                "username",
+                "password",
+                "first_name",
+                "last_name",
+            ],
         });
 
         if (!user) {
@@ -43,8 +49,8 @@ async function basicAuth(req, res, next) {
         req.user = {
             id: user.id,
             username: user.username,
-            firstName: user.firstName,
-            lastName: user.lastName,
+            first_name: user.first_name,
+            last_name: user.last_name,
         };
         console.log("Auth Done");
 

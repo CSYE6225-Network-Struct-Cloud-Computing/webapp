@@ -20,10 +20,10 @@ async function updateUser(req, res) {
         const user = req.user;
 
         if (first_name) {
-            user.firstName = first_name;
+            user.first_name = first_name;
         }
         if (last_name) {
-            user.lastName = last_name;
+            user.last_name = last_name;
         }
         if (password) {
             const BcryptPassword = await bcrypt.hash(password, 10);
@@ -53,8 +53,8 @@ async function getUser(req, res) {
         // Return user information
         return res.json({
             id: user.id,
-            first_name: user.firstName,
-            last_name: user.lastName,
+            first_name: user.first_name,
+            last_name: user.last_name,
             username: user.username,
             account_created: user.account_created,
             account_updated: user.account_updated,
@@ -70,30 +70,39 @@ async function createNewUser(req, res) {
         const { first_name, last_name, password, username } = req.body;
 
         var regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        console.log("first_name", first_name);
+        console.log("first_name", last_name);
+        console.log("first_name", password);
+        console.log("first_name", username);
 
         if (!first_name || !last_name || !password || !regex.test(username)) {
+            console.log("CALLED 1");
             return res.status(400).end();
         }
-
+        console.log("CALLED 1-1");
         const chechIfExistingUser = await User.findOne({ where: { username } });
         if (chechIfExistingUser) {
+            console.log("CALLED 2");
             return res.status(400).end();
         }
-
+        console.log("CALLED 3");
         const BcryptPassword = await bcrypt.hash(password, 10);
 
         const newCreatedUser = await User.create({
-            firstName: first_name,
-            lastName: last_name,
+            first_name: first_name,
+            last_name: last_name,
             username: username,
             password: BcryptPassword,
         });
+        console.log("CALLED 4");
+        // return res.status(201).end();
+        delete newCreatedUser.dataValues.password;
+        return res.status(201).json(newCreatedUser);
 
-        return res.status(201).end();
         // .json({
         //     id: newCreatedUser.id,
-        //     first_name: newCreatedUser.firstName,
-        //     last_name: newCreatedUser.lastName,
+        //     first_name: newCreatedUser.first_name,
+        //     last_name: newCreatedUser.last_name,
         //     username: newCreatedUser.email,
         //     account_created: newCreatedUser.account_created,
         //     account_updated: newCreatedUser.account_updated,

@@ -18,11 +18,11 @@ module.exports = (sequelize) => {
                 noUpdate: true,
                 readOnly: true,
             },
-            firstName: {
+            first_name: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            lastName: {
+            last_name: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },

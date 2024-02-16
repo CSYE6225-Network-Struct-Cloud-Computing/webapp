@@ -4,10 +4,10 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest",
         "dev": "nodemon index.js",
         "start": "node index.js",
-        "test": "jest"
+        "testing": "node server.js"
     },
     "keywords": [],
     "author": "",
@@ -24,6 +24,7 @@
     },
     "devDependencies": {
         "nodemon": "^3.0.3",
-        "sequelize-cli": "^6.6.2"
+        "sequelize-cli": "^6.6.2",
+        "supertest": "^6.3.4"
     }
 }
