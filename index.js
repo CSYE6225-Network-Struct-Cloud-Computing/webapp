@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 app.use(bodyParser.json());
-app.use(middleware.CheckDbConnectionAndCacheControl);
+app.use(middleware.CheckDbConnectionAndCacheControlAndPayloadCheck);
 
 app.use("/v1/user", userRouter);
 app.use("/", route);

@@ -6,9 +6,9 @@ function otherMethodsNotAllowed(req, res, next) {
 function healthCheck(req, res, next) {
     res.setHeader("Cache-Control", "no-cache");
 
-    console.log(JSON.stringify(req.body) == JSON.stringify({}));
-    console.log(req.get("content-length") >= 1);
-    console.log(req._parsedUrl.search != null);
+    // console.log(JSON.stringify(req.body) == JSON.stringify({}));
+    // console.log(req.get("content-length") >= 1);
+    // console.log(req._parsedUrl.search != null);
 
     // If Payload
     if (req.get("content-length") >= 1 || req._parsedUrl.search != null) {
