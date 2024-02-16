@@ -22,6 +22,7 @@ const checkDatabaseConnectivityAndCreation = async () => {
         await connection.query(
             `CREATE DATABASE IF NOT EXISTS \`${database}\`;`
         );
+        await connection.close();
         db.sequelize
             .sync({ alter: true })
             .then(() => {
