@@ -5,8 +5,12 @@ async function updateUser(req, res) {
     try {
         const { first_name, last_name, password } = req.body;
 
+        if (req.body.username != undefined) {
+            return res.status(400).end();
+        }
+
         if (!first_name && !last_name && !password) {
-            return res.status(204).end();
+            return res.status(400).end();
         }
 
         // console.log("REQ User : ", req.user);
@@ -30,7 +34,7 @@ async function updateUser(req, res) {
 
         await User.update(user, { where: { username: username } });
 
-        return res.status(201).end();
+        return res.status(204).end();
     } catch (error) {
         console.error("Error updating user:", error);
         return res.status(400).end();
