@@ -20,7 +20,7 @@ test("Test 1 - Create an account and Use the Get Call to validate if account exi
         .send(newUser)
         .set("Accept", "application/json")
         .expect("Cache-Control", /no-cache/)
-        .expect(201);
+        .expect(202);
 
     delete createdUser.body.account_created;
     delete createdUser.body.account_updated;
@@ -53,7 +53,7 @@ test("Test 2 - Update the account and using the GET call validate if the account
         .send(updateUser)
         .set("Accept", "application/json")
         .expect("Cache-Control", /no-cache/)
-        .expect(204);
+        .expect(201);
 
     const getUser = await request(app)
         .get("/v1/user/self")
