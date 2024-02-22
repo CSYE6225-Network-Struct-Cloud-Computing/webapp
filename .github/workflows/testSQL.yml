@@ -15,7 +15,7 @@ jobs:
                     MYSQL_DATABASE: ${{ secrets.MYSQL_DB_NAME_APP }}
                     MYSQL_USER: ${{ secrets.MYSQL_USERNAME_APP }}
                     MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD_APP }}
-                    MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_PASSWORD_APP }}
+                    MYSQL_ROOT_PASSWORD: admin
                 ports:
                     - 3306:3306
                 options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
