@@ -5,6 +5,9 @@ on: [pull_request]
 jobs:
     server-api:
         runs-on: ubuntu-latest
+         defaults:
+            run:
+                working-directory: app
         services:
             mysql:
                 image: mysql:5.7

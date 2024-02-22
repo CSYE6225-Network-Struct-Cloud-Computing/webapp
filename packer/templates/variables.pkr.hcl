@@ -28,7 +28,7 @@ variable "MYSQL_USERNAME" {
 }
 
 variable "MYSQL_PASSWORD" {
-  type    = string
+  type = string
 }
 
 variable "MYSQL_DB_NAME" {

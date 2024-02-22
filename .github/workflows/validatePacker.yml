@@ -13,7 +13,7 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
-            - name: Packer fmt
+            - name: Packer fmt command
               run: packer fmt -check $GITHUB_WORKSPACE/packer/templates/.
 
     validate:
@@ -26,9 +26,8 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
-            - name: Packer Init
+            - name: Packer init comamnd
               run: packer init $GITHUB_WORKSPACE/packer/templates/.
 
-            - name: Run `packer validate`
-              id: validate
+            - name: Packer Validate Command
               run: 'packer validate -var "project_id=${{ secrets.PROJECT_ID }}" -var "source_image_family=${{ secrets.SOURCE_IMAGE_FAMILY }}" -var "ssh_username=${{ secrets.SSH_USERNAME }}" -var "zone=${{ secrets.ZONE }}" -var "machine_type=${{ secrets.MACHINE_TYPE }}" -var "MYSQL_USERNAME=${{ secrets.MYSQL_USERNAME }}" -var "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" -var "MYSQL_DB_NAME=${{ secrets.MYSQL_DB_NAME }}" -var "TEST_MYSQL_DB_NAME=${{ secrets.TEST_MYSQL_DB_NAME }}" -var "PORT=${{ secrets.PORT }}"  $GITHUB_WORKSPACE/packer/templates/. '
