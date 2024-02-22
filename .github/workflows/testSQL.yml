@@ -5,7 +5,7 @@ on: [pull_request]
 jobs:
     server-api:
         runs-on: ubuntu-latest
-         defaults:
+        defaults:
             run:
                 working-directory: app
         services:
