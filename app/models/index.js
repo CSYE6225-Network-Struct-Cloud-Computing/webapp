@@ -23,14 +23,13 @@ const checkDatabaseConnectivityAndCreation = async () => {
             `CREATE DATABASE IF NOT EXISTS \`${database}\`;`
         );
         await connection.close();
-        db.sequelize
-            .sync({ alter: true })
-            .then(() => {
-                console.log("check Database Connectivity And Creation");
-            })
-            .catch((error) => {
-                console.log("Error connecting with database!", error);
-            });
+        await db.sequelize.sync({ alter: true });
+        // .then(() => {
+        //     console.log("check Database Connectivity And Creation");
+        // })
+        // .catch((error) => {
+        //     console.log("Error connecting with database!", error);
+        // });
 
         console.log("MYSQL Database has been created / updated : ", database);
     } catch (error) {

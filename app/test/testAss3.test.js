@@ -1,11 +1,18 @@
-const db = require("../models/index.js");
 const { app } = require("../app.js");
+const db = require("../models/index.js");
 const request = require("supertest");
 
 beforeAll(async () => {
     await db.checkDatabaseConnectivityAndCreation();
-    await app;
 });
+
+// beforeAll(() => {
+//     return app
+//         .then(() => db.checkDatabaseConnectivicltyAndCreation())
+//         .catch((error) => {
+//             console.error("An error occurred:", error);
+//         });
+// });
 
 const newUser = {
     first_name: "om",
