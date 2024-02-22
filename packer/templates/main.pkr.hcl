@@ -25,54 +25,54 @@ build {
   sources = ["source.googlecompute.centos"]
 
   provisioner "shell" {
-    script = "packer/scripts/update.sh"
+    script = "./scripts/update.sh"
   }
 
   provisioner "shell" {
-    script = "packer/scripts/installRequirements.sh"
+    script = "./scripts/installRequirements.sh"
   }
 
   provisioner "shell" {
-    script = "packer/scripts/createUser.sh"
+    script = "./scripts/createUser.sh"
   }
 
   provisioner "file" {
-    source      = "app"
+    source      = "../app"
     destination = "/tmp"
   }
 
   provisioner "shell" {
-    script = "packer/scripts/moveApp.sh"
+    script = "./scripts/moveApp.sh"
   }
 
   provisioner "shell" {
-    script = "packer/scripts/updatePermission.sh"
+    script = "./scripts/updatePermission.sh"
   }
 
   provisioner "shell" {
-    script = "packer/scripts/createEnv.sh"
+    script = "./scripts/createEnv.sh"
     environment_vars = [ "MYSQL_USERNAME=${var.MYSQL_USERNAME}" , "MYSQL_PASSWORD=${var.MYSQL_PASSWORD}", "MYSQL_DB_NAME=${var.MYSQL_DB_NAME}", "TEST_MYSQL_DB_NAME=${var.TEST_MYSQL_DB_NAME}", "PORT=${var.PORT}" ]
   }
 
   provisioner "shell" {
-    script = "packer/scripts/runNpmInstall.sh"
+    script = "./scripts/runNpmInstall.sh"
   }
 
   provisioner "shell" {
-    script = "packer/scripts/runTests.sh"
+    script = "./scripts/runTests.sh"
   }
 
   provisioner "file" {
-    source      = "packer/serviceFile/runApp.service"
+    source      = "./serviceFile/runApp.service"
     destination = "/tmp/runApp.service"
   }
 
   provisioner "shell" {
-    script = "packer/scripts/moveServiceFile.sh"
+    script = "./scripts/moveServiceFile.sh"
   }
 
   provisioner "shell" {
-    script = "packer/scripts/enableService.sh"
+    script = "./scripts/enableService.sh"
   }
 
 }
