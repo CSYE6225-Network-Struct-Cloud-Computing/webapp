@@ -1,0 +1,37 @@
+name: MI Builder
+
+on: [push]
+
+jobs:
+    packer-build:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: packer
+        steps:
+            - name: Checkout the Source Code
+              uses: "actions/checkout@v3"
+
+            - name: Authentication with GCP
+
+              uses: "google-github-actions/auth@v1"
+              with:
+                  credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+            - name: Setup `packer`
+              uses: hashicorp/setup-packer@main
+              id: setup
+              with:
+                  version: "latest"
+
+            - name: Init Packer
+              id: init
+              run: "packer init $GITHUB_WORKSPACE/packer/."
+
+            - name: Validate Packer files
+              id: validate
+              run: 'packer validate -var "project_id=${{ secrets.PROJECT_ID }}" -var "source_image_family=${{ secrets.SOURCE_IMAGE_FAMILY }}" -var "ssh_username=${{ secrets.SSH_USERNAME }}" -var "zone=${{ secrets.ZONE }}" -var "machine_type=${{ secrets.MACHINE_TYPE }}" -var "MYSQL_USERNAME=${{ secrets.MYSQL_USERNAME }}" -var "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" -var "MYSQL_DB_NAME=${{ secrets.MYSQL_DB_NAME }}" -var "TEST_MYSQL_DB_NAME=${{ secrets.TEST_MYSQL_DB_NAME }}" -var "PORT=${{ secrets.PORT }}" $GITHUB_WORKSPACE/packer/. '
+
+            - name: Build Machine Image
+              id: build
+              run: 'packer build -var "project_id=${{ secrets.PROJECT_ID }}" -var "source_image_family=${{ secrets.SOURCE_IMAGE_FAMILY }}" -var "ssh_username=${{ secrets.SSH_USERNAME }}" -var "zone=${{ secrets.ZONE }}" -var "machine_type=${{ secrets.MACHINE_TYPE }}" -var "MYSQL_USERNAME=${{ secrets.MYSQL_USERNAME }}" -var "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" -var "MYSQL_DB_NAME=${{ secrets.MYSQL_DB_NAME }}" -var "TEST_MYSQL_DB_NAME=${{ secrets.TEST_MYSQL_DB_NAME }}" -var "PORT=${{ secrets.PORT }}" $GITHUB_WORKSPACE/packer/. '
