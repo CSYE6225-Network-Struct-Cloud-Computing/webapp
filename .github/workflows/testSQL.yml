@@ -29,6 +29,7 @@ jobs:
                   echo MYSQL_DB_NAME=${{ secrets.MYSQL_DB_NAME_APP }} >> .env
                   echo MYSQL_USERNAME=${{ secrets.MYSQL_USERNAME_APP }}>> .env
                   echo MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD_APP }} >> .env
+                  echo TEST_MYSQL_DB_NAME=${{ secrets.MYSQL_DB_NAME_APP }} >> .env
                   echo PORT=3000
 
             - name: Use Node.js version 21
