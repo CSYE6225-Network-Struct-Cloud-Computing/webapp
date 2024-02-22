@@ -9,7 +9,7 @@ packer {
 
 locals {
   date_time_stamp = formatdate("MM-DD-YYYY-hh-mm-ss", timestamp())
-}
+      }
 
 source "googlecompute" "centos" {
   project_id = var.project_id
