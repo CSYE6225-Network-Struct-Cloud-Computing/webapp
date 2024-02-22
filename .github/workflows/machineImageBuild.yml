@@ -12,26 +12,22 @@ jobs:
             - name: Checkout the Source Code
               uses: "actions/checkout@v3"
 
-            - name: Authentication with GCP
+            - name: Connect with GCP Authentication
 
               uses: "google-github-actions/auth@v1"
               with:
                   credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-            - name: Setup `packer`
+            - name: Setup Packer for running
               uses: hashicorp/setup-packer@main
-              id: setup
               with:
                   version: "latest"
 
-            - name: Init Packer
-              id: init
+            - name: Packer Init Command
               run: "packer init $GITHUB_WORKSPACE/packer/templates/."
 
-            - name: Validate Packer files
-              id: validate
+            - name: Packer Validate Command
               run: 'packer validate -var "project_id=${{ secrets.PROJECT_ID }}" -var "source_image_family=${{ secrets.SOURCE_IMAGE_FAMILY }}" -var "ssh_username=${{ secrets.SSH_USERNAME }}" -var "zone=${{ secrets.ZONE }}" -var "machine_type=${{ secrets.MACHINE_TYPE }}" -var "MYSQL_USERNAME=${{ secrets.MYSQL_USERNAME }}" -var "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" -var "MYSQL_DB_NAME=${{ secrets.MYSQL_DB_NAME }}" -var "TEST_MYSQL_DB_NAME=${{ secrets.TEST_MYSQL_DB_NAME }}" -var "PORT=${{ secrets.PORT }}" $GITHUB_WORKSPACE/packer/templates/. '
 
-            - name: Build Machine Image
-              id: build
+            - name: Packer Build Command
               run: 'packer build -var "project_id=${{ secrets.PROJECT_ID }}" -var "source_image_family=${{ secrets.SOURCE_IMAGE_FAMILY }}" -var "ssh_username=${{ secrets.SSH_USERNAME }}" -var "zone=${{ secrets.ZONE }}" -var "machine_type=${{ secrets.MACHINE_TYPE }}" -var "MYSQL_USERNAME=${{ secrets.MYSQL_USERNAME }}" -var "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" -var "MYSQL_DB_NAME=${{ secrets.MYSQL_DB_NAME }}" -var "TEST_MYSQL_DB_NAME=${{ secrets.TEST_MYSQL_DB_NAME }}" -var "PORT=${{ secrets.PORT }}" $GITHUB_WORKSPACE/packer/templates/. '

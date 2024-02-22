@@ -18,7 +18,7 @@ source "googlecompute" "centos" {
   zone                = var.zone
   machine_type        = var.machine_type
   ssh_username        = var.ssh_username
-  image_name = format("centos-machine-image-%s", local.date_time_stamp)
+  image_name          = format("centos-machine-image-%s", local.date_time_stamp)
 }
 
 build {
@@ -50,8 +50,8 @@ build {
   }
 
   provisioner "shell" {
-    script = "./scripts/createEnv.sh"
-    environment_vars = [ "MYSQL_USERNAME=${var.MYSQL_USERNAME}" , "MYSQL_PASSWORD=${var.MYSQL_PASSWORD}", "MYSQL_DB_NAME=${var.MYSQL_DB_NAME}", "TEST_MYSQL_DB_NAME=${var.TEST_MYSQL_DB_NAME}", "PORT=${var.PORT}" ]
+    script           = "./scripts/createEnv.sh"
+    environment_vars = ["MYSQL_USERNAME=${var.MYSQL_USERNAME}", "MYSQL_PASSWORD=${var.MYSQL_PASSWORD}", "MYSQL_DB_NAME=${var.MYSQL_DB_NAME}", "TEST_MYSQL_DB_NAME=${var.TEST_MYSQL_DB_NAME}", "PORT=${var.PORT}"]
   }
 
   provisioner "shell" {
@@ -73,6 +73,6 @@ build {
 
   provisioner "shell" {
     script = "./scripts/enableService.sh"
-  }
+      }
 
 }
