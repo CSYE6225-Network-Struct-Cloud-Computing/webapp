@@ -1,4 +1,4 @@
-name: MI Builder
+name: Machine Image Build
 
 on: [push]
 
