@@ -8,7 +8,7 @@ Omkumar Dhirenbhai Solanki - NUID: 002841552
 
 ```
 
-Open the code in vs code
+Open the code in visual studio code
 run npm i to install all the dependencies
 
 If you are using Windows Open the Command Prompt and type
