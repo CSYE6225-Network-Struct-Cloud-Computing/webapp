@@ -17,22 +17,6 @@ net stop MySQL80
 To Start MySQL Service:
 net start MySQL80
 
-To Run locally : npm run dev or node index.js
-
-Dependencies used :
-
-"dependencies": {
-        "basic-auth": "^2.0.1",
-        "bcrypt": "^5.1.1",
-        "body-parser": "^1.20.2",
-        "dotenv": "^16.4.1",
-        "express": "^4.18.2",
-        "mysql2": "^3.9.1",
-        "sequelize": "^6.36.0"
-    },
-    "devDependencies": {
-        "nodemon": "^3.0.3",
-        "sequelize-cli": "^6.6.2"
-    }
+To Run locally : npm run dev or node server.js
 
 ```
