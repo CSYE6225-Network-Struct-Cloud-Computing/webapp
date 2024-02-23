@@ -12,7 +12,7 @@ Open the code in visual studio code
 run npm i to install all the dependencies
 
 If you are using Windows Open the Command Prompt and type
-To Stop MySQL Service:
+To Stop MySQL Service :
 net stop MySQL80
 To Start MySQL Service:
 net start MySQL80
