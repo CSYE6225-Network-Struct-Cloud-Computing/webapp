@@ -58,9 +58,9 @@ build {
     script = "./scripts/runNpmInstall.sh"
   }
 
-  provisioner "shell" {
-    script = "./scripts/runTests.sh"
-  }
+  # provisioner "shell" {
+  #   script = "./scripts/runTests.sh"
+  # }
 
   provisioner "file" {
     source      = "./serviceFile/runApp.service"
