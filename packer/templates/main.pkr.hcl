@@ -26,7 +26,7 @@ build {
 
   provisioner "shell" {
     script = "./scripts/update.sh"
-        }
+  
 
   provisioner "shell" {
     script = "./scripts/installRequirements.sh"
