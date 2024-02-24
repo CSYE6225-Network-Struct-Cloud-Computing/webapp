@@ -1,4 +1,4 @@
-1.  Create a new Project
+1.  Create a new Project in GCP
 2.  Enable gcloud services enable compute.googleapis.com
 3.  Create a Service Account and role as Compute Instance Admin and Service Account User
     Download the key
