@@ -1,8 +1,7 @@
 [Unit]
 Description=CSYE 6225 App
-Requires=mysqld.service
-After=mysqld.service
-After=network.target
+ConditionPathExists=/home/csye6225/app/.env
+After=multi-user.target
 
 [Service]
 User=csye6225

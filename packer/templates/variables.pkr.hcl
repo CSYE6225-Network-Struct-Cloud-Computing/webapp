@@ -22,26 +22,26 @@ variable "machine_type" {
   default = "e2-standard-2"
 }
 
-variable "MYSQL_USERNAME" {
-  type    = string
-  default = "root"
-}
+# variable "MYSQL_USERNAME" {
+#   type    = string
+#   default = "root"
+# }
 
-variable "MYSQL_PASSWORD" {
-  type = string
-}
+# variable "MYSQL_PASSWORD" {
+#   type = string
+# }
 
-variable "MYSQL_DB_NAME" {
-  type    = string
-  default = "csye"
-}
+# variable "MYSQL_DB_NAME" {
+#   type    = string
+#   default = "csye"
+# }
 
-variable "TEST_MYSQL_DB_NAME" {
-  type    = string
-  default = "testdb"
-}
+# variable "TEST_MYSQL_DB_NAME" {
+#   type    = string
+#   default = "testdb"
+# }
 
-variable "PORT" {
-  type    = string
-  default = "3000"
-}
+# variable "PORT" {
+#   type    = string
+#   default = "3000"
+# }

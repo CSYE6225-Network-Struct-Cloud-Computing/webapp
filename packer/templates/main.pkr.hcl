@@ -49,11 +49,11 @@ build {
     script = "./scripts/updatePermission.sh"
   }
 
-  provisioner "shell" {
-    script           = "./scripts/createEnv.sh"
-    environment_vars = ["MYSQL_USERNAME=${var.MYSQL_USERNAME}", "MYSQL_PASSWORD=${var.MYSQL_PASSWORD}", "MYSQL_DB_NAME=${var.MYSQL_DB_NAME}", "TEST_MYSQL_DB_NAME=${var.TEST_MYSQL_DB_NAME}", "PORT=${var.PORT}"]
-  }
-
+  # provisioner "shell" {
+  #   script           = "./scripts/createEnv.sh"
+  #   environment_vars = ["MYSQL_USERNAME=${var.MYSQL_USERNAME}", "MYSQL_PASSWORD=${var.MYSQL_PASSWORD}", "MYSQL_DB_NAME=${var.MYSQL_DB_NAME}", "TEST_MYSQL_DB_NAME=${var.TEST_MYSQL_DB_NAME}", "PORT=${var.PORT}", "MYSQL_HOST=localhost"]
+  # }
+ 
   provisioner "shell" {
     script = "./scripts/runNpmInstall.sh"
   }
