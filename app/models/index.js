@@ -4,6 +4,7 @@ const Sequelize = require("sequelize");
 const mysql = require("mysql2/promise");
 const process = require("process");
 const basename = path.basename(__filename);
+// require("dotenv").config();
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.js")[env];
 const db = {};
@@ -11,6 +12,7 @@ const db = {};
 let sequelize;
 
 const checkDatabaseConnectivityAndCreation = async () => {
+    console.log(process.env.NODE_ENV);
     try {
         const { host, port, username: user, password, database } = config;
         const connection = await mysql.createConnection({
