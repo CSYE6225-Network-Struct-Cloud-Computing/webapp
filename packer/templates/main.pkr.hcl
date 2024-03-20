@@ -29,6 +29,14 @@ build {
   }
 
   provisioner "shell" {
+    script = "./scripts/installOpsAgent.sh"
+  }
+
+  provisioner "shell" {
+    script = "./scripts/configureOpsAgent.sh"
+  }
+
+  provisioner "shell" {
     script = "./scripts/installRequirements.sh"
   }
 
