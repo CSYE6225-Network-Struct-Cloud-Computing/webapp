@@ -13,14 +13,8 @@ const db = {};
 let sequelize;
 
 const checkDatabaseConnectivityAndCreation = async () => {
-    logger.error('error checkDatabaseConnectivityAndCreation api called');
-    logger.warn('warn checkDatabaseConnectivityAndCreation api called');
-    logger.info('info checkDatabaseConnectivityAndCreation api called');
-    logger.http('http checkDatabaseConnectivityAndCreation api called');
-    logger.verbose('verbose checkDatabaseConnectivityAndCreation api called');
-    logger.debug('debug checkDatabaseConnectivityAndCreation api called');
-    logger.silly('silly checkDatabaseConnectivityAndCreation api called');
-    console.log(process.env.NODE_ENV);
+    logger.debug('check Database Connectivity And Creation api called');
+    // console.log(process.env.NODE_ENV);
     try {
         const { host, port, username: user, password, database } = config;
         const connection = await mysql.createConnection({
@@ -41,9 +35,11 @@ const checkDatabaseConnectivityAndCreation = async () => {
         //     console.log("Error connecting with database!", error);
         // });
 
-        console.log("MYSQL Database has been created / updated : ", database);
+        // console.log("MYSQL Database has been created / updated : ", database);
+        logger.info(`MYSQL Database has been created / updated: ${database}`);
     } catch (error) {
-        console.error("Error while creating database: ", error.message);
+        // console.error("Error while creating database: ", error.message);
+        logger.error(`Error while creating database: ${error.message}`);
     }
 };
 

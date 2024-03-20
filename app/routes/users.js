@@ -7,7 +7,6 @@ const basicAuth = require("../middlewares/auth.js");
 router.post("/", createNewUser);
 
 router.use(basicAuth);
-console.log();
 router.put("/self", updateUser);
 router.get("/self", getUser);
 
