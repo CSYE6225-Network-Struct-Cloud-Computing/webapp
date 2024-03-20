@@ -8,21 +8,14 @@ jobs:
         defaults:
             run:
                 working-directory: app
-        services:
-            mysql:
-                image: mysql:5.7
-                env:
-                    MYSQL_DATABASE: ${{ secrets.MYSQL_DB_NAME_APP }}
-                    MYSQL_USER: ${{ secrets.MYSQL_USERNAME_APP }}
-                    MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD_APP }}
-                    MYSQL_ROOT_PASSWORD: admin
-                ports:
-                    - 3306:3306
-                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+          
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
 
+            - name: start mysql server
+              run: sudo systemctl start mysql.service
+  
             - name: Create new env file
               run: |
                   touch .env
