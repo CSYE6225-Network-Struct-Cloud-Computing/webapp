@@ -41,8 +41,8 @@ test("Test 1 - Create an account and Use the Get Call to validate if account exi
     delete getUser.body.account_created;
     delete getUser.body.account_updated;
 
-    console.log(createdUser.body);
-    console.log(getUser.body);
+    // console.log(createdUser.body);
+    // console.log(getUser.body);
     expect(createdUser.body).toEqual(getUser.body);
 });
 

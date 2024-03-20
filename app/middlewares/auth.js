@@ -2,6 +2,7 @@
 
 const bcrypt = require("bcrypt");
 const { User } = require("../models");
+const logger = require("../logs-app/index")
 async function basicAuth(req, res, next) {
     if (req.path === "/users/authenticate") {
         return next();
@@ -22,6 +23,8 @@ async function basicAuth(req, res, next) {
     // console.log(username);
     // console.log(password);
 
+    logger.info(`Authentication started for user with username : ${username}`);
+
     try {
         const user = await User.findOne({
             where: { username: username },
@@ -35,6 +38,8 @@ async function basicAuth(req, res, next) {
         });
 
         if (!user) {
+            logger.warn(`user with username : ${username} not found`);
+            logger.debug(`user with username : ${username} not found`);
             return res.status(400).end();
         }
         // console.log("User", user);
@@ -43,6 +48,8 @@ async function basicAuth(req, res, next) {
         // console.log("password match ", passwordMatch);
 
         if (!passwordMatch) {
+            logger.debug(`password is not correct for user with username : ${username}`);
+            logger.warn(`password is not correct for user with username : ${username}`);
             return res.status(400).end();
         }
 
@@ -52,10 +59,12 @@ async function basicAuth(req, res, next) {
             first_name: user.first_name,
             last_name: user.last_name,
         };
-        console.log("Auth Done");
+        // console.log("Auth Done");
+        logger.info(`Authentication Successfull for user with username : ${username} `);
 
         next();
     } catch (error) {
+        logger.error(`Error in Basic Auth : ${error}`);
         return res.status(400).end();
     }
 }

@@ -9,17 +9,17 @@ if (!fs.existsSync(logFilePath)) {
   }
 
 const logger = winston.createLogger({
-    level: 'silly',
+    level: 'info',
     format: winston.format.combine(
         winston.format.timestamp(),
         winston.format.json()
       ),
     transports: [
-        // new winston.transports.Console(),
+        new winston.transports.Console(),
         new winston.transports.File({ filename: logFilePath })
     ],
 });
 
-logger.info('This is an info log message');
+logger.info('Logger has been initialized successfully');
 
 module.exports = logger;
