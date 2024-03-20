@@ -4,6 +4,7 @@ const Sequelize = require("sequelize");
 const mysql = require("mysql2/promise");
 const process = require("process");
 const basename = path.basename(__filename);
+const logger = require('../logs-app/index');
 // require("dotenv").config();
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.js")[env];
@@ -12,6 +13,13 @@ const db = {};
 let sequelize;
 
 const checkDatabaseConnectivityAndCreation = async () => {
+    logger.error('error checkDatabaseConnectivityAndCreation api called');
+    logger.warn('warn checkDatabaseConnectivityAndCreation api called');
+    logger.info('info checkDatabaseConnectivityAndCreation api called');
+    logger.http('http checkDatabaseConnectivityAndCreation api called');
+    logger.verbose('verbose checkDatabaseConnectivityAndCreation api called');
+    logger.debug('debug checkDatabaseConnectivityAndCreation api called');
+    logger.silly('silly checkDatabaseConnectivityAndCreation api called');
     console.log(process.env.NODE_ENV);
     try {
         const { host, port, username: user, password, database } = config;
