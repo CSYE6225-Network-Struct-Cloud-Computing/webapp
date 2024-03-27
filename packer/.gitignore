@@ -16,3 +16,4 @@ crash.log
 *.box
 
 csye-6225-spring-2024-*.json
+.DS_Store

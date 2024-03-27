@@ -38,10 +38,26 @@ async function basicAuth(req, res, next) {
         });
 
         if (!user) {
-            logger.warn(`user with username : ${username} not found`);
-            logger.debug(`user with username : ${username} not found`);
-            return res.status(400).end();
+            logger.warn(`user with username : ${username} not found `);
+            logger.debug(`user with username : ${username} not found `);
+            return res.status(404).end();
+            // 404 - Not Found
         }
+
+        const user1 = await User.findOne({
+            where: { username: username, email_verified: true },
+            attributes: [
+                "username"
+            ],
+        });
+
+        if (!user1) {
+            logger.warn(`user with username : ${username} not verified`);
+            logger.debug(`user with username : ${username} not verified`);
+            return res.status(403).end();
+            // 404 - forbidden
+        }
+        
         // console.log("User", user);
         // console.log("password ", user.password);
         const passwordMatch = await bcrypt.compare(password, user.password);
@@ -50,7 +66,8 @@ async function basicAuth(req, res, next) {
         if (!passwordMatch) {
             logger.debug(`password is not correct for user with username : ${username}`);
             logger.warn(`password is not correct for user with username : ${username}`);
-            return res.status(400).end();
+            return res.status(401).end();
+            // 401 - Unauthorized
         }
 
         req.user = {
