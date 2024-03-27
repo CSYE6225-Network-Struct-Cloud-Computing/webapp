@@ -171,7 +171,7 @@ async function createNewUser(req, res) {
         if(process.env.NODE_ENV == 'test'){
             newCreatedUser.update({email_verified: true});
         } else {
-            publishMessage("my-test-ps", emailData);
+            publishMessage(process.env.TOPIC_ID, emailData);
         }
         return res.status(201).json(newCreatedUser);
 
