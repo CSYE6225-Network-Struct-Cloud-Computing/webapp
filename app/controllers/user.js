@@ -168,8 +168,11 @@ async function createNewUser(req, res) {
         const emailData = {
             username: newCreatedUser.dataValues.username
         };
-        publishMessage("my-test-ps", emailData);
-        
+        if(process.env.NODE_ENV == 'test'){
+            newCreatedUser.update({email_verified: true});
+        } else {
+            publishMessage("my-test-ps", emailData);
+        }
         return res.status(201).json(newCreatedUser);
 
     } catch (error) {
