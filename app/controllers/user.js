@@ -28,7 +28,7 @@ async function verifyEmail(req, res) {
                     if(user1)
                     {
                         logger.info(`Email Already Verified for Username : ${user1.username} `);
-                        return res.status(400).end();
+                        return res.status(400).json({ message: `Email Already Verified for Username : ${user1.username}` });
                     }
 
                     await User.update(
@@ -36,22 +36,22 @@ async function verifyEmail(req, res) {
                         { where: { token: token } }
                     );
                     logger.info(`Email Verified for Username : ${user.username} `);
-                    return res.status(200).end();
+                    return res.status(200).json({ message: `Email Verified for Username : ${user.username}` });
                 } else {
                     logger.error(`Token has expired for Username : ${user.username}`);
-                    return res.status(401).end();
+                    return res.status(401).json({ message: `Token has expired for Username : ${user.username}` });
                 }
             } else {
                 logger.error(`Token is invalid : ${token}`);
-                return res.status(404).end();
+                return res.status(404).json({ message: `Token is invalid : ${token}` });
             }
         } else {
             logger.error(`Token format is not valid`);
-            return res.status(400).end();
+            return res.status(400).json({ message: `Token format is not valid` });
         }
     } catch (error) {
         logger.error(`Error While Verifying Token: ${error}`);
-        return res.status(400).end();
+        return res.status(400).json({ message: `Error While Verifying Token: ${error}` });
     }
 }
 
