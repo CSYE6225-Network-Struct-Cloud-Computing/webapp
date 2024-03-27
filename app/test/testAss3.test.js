@@ -17,7 +17,7 @@ beforeAll(async () => {
 const newUser = {
     first_name: "om",
     last_name: "solanki",
-    username: "testemail@gmail.com",
+    username: "test@gmail.com",
     password: "1234",
 };
 // Test 1 - Create an account, and using the GET call, validate account exists.
@@ -31,6 +31,7 @@ test("Test 1 - Create an account and Use the Get Call to validate if account exi
 
     delete createdUser.body.account_created;
     delete createdUser.body.account_updated;
+    delete createdUser.body.email_verified;
 
     const getUser = await request(app)
         .get("/v1/user/self")

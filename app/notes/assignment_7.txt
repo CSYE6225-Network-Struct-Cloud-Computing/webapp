@@ -24,3 +24,5 @@ https://cloud.google.com/vpc/docs/configure-serverless-vpc-access#console
 
 sudo mysql -u webapp -h "private_ip" -p
 sudo mysql -u webapp -h 10.0.2.11 -p
+
+https://cloud.google.com/sql/docs/mysql/connect-functions#private-ip
