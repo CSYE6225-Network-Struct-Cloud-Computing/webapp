@@ -14,6 +14,13 @@ async function CheckDbConnectionAndCacheControlAndPayloadCheck(req, res, next) {
                 res.status(400).end();
                 return;
             }
+        } else {
+            if (req.get("content-length") >= 1) {
+                // console.log("Get has payload");
+                logger.warn('Get Method Cannot have PayLoad1');
+                res.status(400).end();
+                return;
+            }
         }
     }
     try {
