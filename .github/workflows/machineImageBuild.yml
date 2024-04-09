@@ -98,6 +98,8 @@ jobs:
                     --tags=${{ secrets.TAGS }} \
                     --create-disk=auto-delete=yes,boot=yes,device-name=persistent-disk-0,image=projects/${{ secrets.PROJECT_ID }}/global/images/${{ needs.packer-build.outputs.image_id }},kms-key=projects/${{ secrets.PROJECT_ID }}/locations/${{ secrets.REGION }}/keyRings/${{ secrets.KEYRING_NAME }}/cryptoKeys/${{ secrets.VM_CRYPTO_KEY }},mode=rw,size=20,type=pd-standard \
                     --no-shielded-secure-boot \
+                    --no-shielded-vtpm \
+                    --no-shielded-integrity-monitoring \
                     --reservation-affinity=any
             - name: Start Rolling Update
               run: |
