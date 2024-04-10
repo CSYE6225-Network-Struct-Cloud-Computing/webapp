@@ -5,8 +5,6 @@ on: [push]
 jobs:
     packer-build:
         runs-on: ubuntu-latest
-        outputs:
-          image_id: ${{ steps.image.outputs.image_id }}
         defaults:
             run:
                 working-directory: packer
@@ -41,14 +39,13 @@ jobs:
             - name: Packer Build Command
               id: image
               run: |
-                image_id=$(packer build -var "project_id=${{ secrets.PROJECT_ID }}" \
-                -var "source_image_family=${{ secrets.SOURCE_IMAGE_FAMILY }}" \
-                -var "ssh_username=${{ secrets.SSH_USERNAME }}" \
-                -var "zone=${{ secrets.ZONE }}" \
-                -var "machine_type=${{ secrets.MACHINE_TYPE }}" \
-                $GITHUB_WORKSPACE/packer/templates/. | grep -oP 'A disk image was created in the .+ project: \K[^ ]+')
-                echo "Image ID: $image_id"
-                echo "image_id=$image_id" >> "$GITHUB_OUTPUT"
+                packer build \
+                  -var "project_id=${{ secrets.PROJECT_ID }}" \
+                  -var "source_image_family=${{ secrets.SOURCE_IMAGE_FAMILY }}" \
+                  -var "ssh_username=${{ secrets.SSH_USERNAME }}" \
+                  -var "zone=${{ secrets.ZONE }}" \
+                  -var "machine_type=${{ secrets.MACHINE_TYPE }}" \
+                  $GITHUB_WORKSPACE/packer/templates/.
                   
     create-instance-update-instance-group:
         needs: packer-build
@@ -59,13 +56,24 @@ jobs:
               with:
                   credentials_json: ${{ secrets.GCP_CREDENTIALS_VM }}
 
+            - name: Fetch Latest Image
+              run: |
+                  image_id=$(gcloud asset search-all-resources --scope='projects/${{ secrets.GCP_PROJECT_ID }}' \
+                    --query='name:centos*' \
+                    --order-by='createTime desc' \
+                    --asset-types='compute.googleapis.com/Image' \
+                    --format='value(displayName)' \
+                    --limit=1)
+                  echo "image_id=$image_id" >> "$GITHUB_ENV"
+                  echo "image_id: $image_id"
+
             - name: generate random name for vm - template
               id : template-name
               run: echo template_name=vm-template-packer-$(date +"%Y-%m-%d-%H-%M-%S") >> "$GITHUB_ENV"
 
             - name: Create Instance
               run: |
-                  echo "Using image ID: ${{ needs.packer-build.outputs.image_id }}"
+                  echo "Using image ID: $image_id"
                   gcloud beta compute instance-templates create "$template_name" \
                     --project=${{ secrets.PROJECT_ID }} \
                     --description="This template is used to create vm instances." \
@@ -96,7 +104,7 @@ jobs:
                     --scopes=https://www.googleapis.com/auth/cloud-platform \
                     --region=${{ secrets.REGION }} \
                     --tags=${{ secrets.TAGS }} \
-                    --create-disk=auto-delete=yes,boot=yes,device-name=persistent-disk-0,image=projects/${{ secrets.PROJECT_ID }}/global/images/${{ needs.packer-build.outputs.image_id }},kms-key=projects/${{ secrets.PROJECT_ID }}/locations/${{ secrets.REGION }}/keyRings/${{ secrets.KEYRING_NAME }}/cryptoKeys/${{ secrets.VM_CRYPTO_KEY }},mode=rw,size=20,type=pd-standard \
+                    --create-disk=auto-delete=yes,boot=yes,device-name=persistent-disk-0,image=projects/${{ secrets.PROJECT_ID }}/global/images/$image_id,kms-key=projects/${{ secrets.PROJECT_ID }}/locations/${{ secrets.REGION }}/keyRings/${{ secrets.KEYRING_NAME }}/cryptoKeys/${{ secrets.VM_CRYPTO_KEY }},mode=rw,size=20,type=pd-standard \
                     --no-shielded-secure-boot \
                     --no-shielded-vtpm \
                     --no-shielded-integrity-monitoring \
