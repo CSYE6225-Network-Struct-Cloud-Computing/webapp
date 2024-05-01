@@ -6,7 +6,7 @@ async function CheckDbConnectionAndCacheControlAndPayloadCheck(req, res, next) {
     res.setHeader("Cache-Control", "no-cache");
 
     if (req.method === "GET") {
-        if(req._parsedUrl.query && req._parsedUrl.query.split('=')[0] != 'token' && req._parsedUrl.pathname != '/v8/user/email')
+        if(req._parsedUrl.query && req._parsedUrl.query.split('=')[0] != 'token' && req._parsedUrl.pathname != '/v1/user/email')
         {
             if (req.get("content-length") >= 1 || req._parsedUrl.search != null) {
                 // console.log("Get has payload");
