@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(middleware.CheckDbConnectionAndCacheControlAndPayloadCheck);
 
-app.use("/v8/user", userRouter);
+app.use("/v1/user", userRouter);
 app.use("/", route);
 
 module.exports = {

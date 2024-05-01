@@ -23,7 +23,7 @@ const newUser = {
 // Test 1 - Create an account, and using the GET call, validate account exists.
 test("Test 1 - Create an account and Use the Get Call to validate if account exists.", async () => {
     const createdUser = await request(app)
-        .post("/v8/user")
+        .post("/v1/user")
         .send(newUser)
         .set("Accept", "application/json")
         .expect("Cache-Control", /no-cache/)
@@ -34,7 +34,7 @@ test("Test 1 - Create an account and Use the Get Call to validate if account exi
     delete createdUser.body.email_verified;
 
     const getUser = await request(app)
-        .get("/v8/user/self")
+        .get("/v1/user/self")
         .auth(newUser.username, newUser.password)
         .expect("Cache-Control", /no-cache/)
         .expect(200);
@@ -56,7 +56,7 @@ test("Test 2 - Update the account and using the GET call validate if the account
     };
 
     const updatedUserPUT = await request(app)
-        .put("/v8/user/self")
+        .put("/v1/user/self")
         .auth(newUser.username, newUser.password)
         .send(updateUser)
         .set("Accept", "application/json")
@@ -64,7 +64,7 @@ test("Test 2 - Update the account and using the GET call validate if the account
         .expect(204);
 
     const getUser = await request(app)
-        .get("/v8/user/self")
+        .get("/v1/user/self")
         .auth(newUser.username, updateUser.password)
         .expect("Cache-Control", /no-cache/)
         .expect(200);
