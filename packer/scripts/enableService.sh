@@ -24,8 +24,8 @@ echo "Enabling the service..."
 sudo systemctl enable runApp.service
 
 # Start the service
-echo "Starting the service..."
-sudo systemctl start runApp.service
+# echo "Starting the service..."
+# sudo systemctl start runApp.service
 
 # # Restart the service
 # echo "Restarting the service..."
