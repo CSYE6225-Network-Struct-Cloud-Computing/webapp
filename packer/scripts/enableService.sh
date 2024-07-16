@@ -13,14 +13,15 @@
 # fi
 
 # Ensure correct permissions and ownership
-sudo chmod 644 /etc/systemd/system/runApp.service
-sudo chown root:root /etc/systemd/system/runApp.service
+# sudo chmod 644 /etc/systemd/system/runApp.service
+# sudo chown root:root /etc/systemd/system/runApp.service
 
 # Restore SELinux context
-sudo restorecon -v /etc/systemd/system/runApp.service
+# sudo restorecon -v /etc/systemd/system/runApp.service
 
 # Enable the service to start on boot
-echo "Enabling the service..."
+# echo "Enabling the service..."
+sudo systemctl deamon-reload
 sudo systemctl enable runApp.service
 
 # Start the service
