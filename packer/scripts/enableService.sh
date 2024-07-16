@@ -21,7 +21,7 @@
 
 # Enable the service to start on boot
 # echo "Enabling the service..."
-sudo systemctl deamon-reload
+sudo systemctl daemon-reload
 sudo systemctl enable runApp.service
 
 # Start the service
