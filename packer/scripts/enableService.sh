@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Reload systemd manager configuration
-echo "Reloading systemd manager configuration..."
-sudo systemctl daemon-reload
+# echo "Reloading systemd manager configuration..."
+# sudo systemctl daemon-reload
 
 # Check if the service file exists after reloading
 # if [[ -f /etc/systemd/system/runApp.service ]]; then
