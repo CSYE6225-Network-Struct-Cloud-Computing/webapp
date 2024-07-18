@@ -13,6 +13,6 @@ sudo mv /tmp/.env /home/csye6225/app/.env
 sudo chmod 644 /home/csye6225/app/.env
 sudo chown csye6225:csye6225 /home/csye6225/app/.env
 
-if [ "$(getenforce)" = "Enforcing" ]; then
-  sudo chcon -t systemd_unit_file_t /home/csye6225/app/.env
-fi
+# if [ "$(getenforce)" = "Enforcing" ]; then
+#   sudo chcon -t systemd_unit_file_t /home/csye6225/app/.env
+# fi

@@ -4,7 +4,7 @@ variable "project_id" {
 
 variable "source_image_family" {
   type    = string
-  default = "centos-stream-8"
+  default = "centos-stream-9"
 }
 
 variable "ssh_username" {
