@@ -96,6 +96,9 @@ jobs:
                       
                       mv /tmp/.env /home/csye6225/app/.env
                       chown -R csye6225:csye6225 /home/csye6225/app
+                      chmod 640 /home/csye6225/app/.env
+
+                      sudo chcon -t systemd_unit_file_t /home/csye6225/app/.env
 
                       systemctl start runApp" \
                     --maintenance-policy=MIGRATE \
