@@ -79,6 +79,15 @@ build {
     script = "./scripts/moveServiceFile.sh"
   }
 
+   provisioner "file" {
+    source      = "./scripts/startAppWrapper.sh"
+    destination = "/tmp/startAppWrapper.sh"
+  }
+
+  provisioner "shell" {
+    script = "./scripts/moveStartAppWrapperFile.sh"
+  }
+
   provisioner "shell" {
     script = "./scripts/enableService.sh"
   }
