@@ -79,7 +79,7 @@ build {
     script = "./scripts/moveServiceFile.sh"
   }
 
-   provisioner "file" {
+  provisioner "file" {
     source      = "./scripts/startAppWrapper.sh"
     destination = "/tmp/startAppWrapper.sh"
   }
