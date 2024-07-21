@@ -99,15 +99,6 @@ jobs:
 
                       sudo chcon -t systemd_unit_file_t /home/csye6225/app/.env
 
-                      # Create and set permissions for the wrapper script
-                      touch /tmp/startAppWrapper.sh
-                      echo '#!/bin/bash' > /tmp/startAppWrapper.sh
-                      echo 'sudo setsebool httpd_can_network_connect 1' >> /tmp/startAppWrapper.sh
-                      echo '/usr/bin/node /home/csye6225/app/server.js' >> /tmp/startAppWrapper.sh
-
-                      mv /tmp/startAppWrapper.sh /home/csye6225/app/startAppWrapper.sh
-                      sudo chmod +x /home/csye6225/app/startAppWrapper.sh
-
                       # Start the application
                       systemctl start runApp" \
                     --maintenance-policy=MIGRATE \
