@@ -4,7 +4,7 @@ variable "project_id" {
 
 variable "source_image_family" {
   type    = string
-  default = "centos-stream-9"
+  default = "ubuntu-2404-lts-amd64"
 }
 
 variable "ssh_username" {
@@ -14,7 +14,7 @@ variable "ssh_username" {
 
 variable "zone" {
   type    = string
-  default = "us-central1-a"
+  default = "us-east1-b"
 }
 
 variable "machine_type" {
@@ -22,26 +22,27 @@ variable "machine_type" {
   default = "e2-standard-2"
 }
 
-# variable "MYSQL_USERNAME" {
-#   type    = string
-#   default = "root"
-# }
+variable "MYSQL_USERNAME" {
+   type    = string
+   default = "csye"
+}
 
-# variable "MYSQL_PASSWORD" {
-#   type = string
-# }
+variable "MYSQL_PASSWORD" {
+   type = string
+   default = "Pass@1234"
+}
 
-# variable "MYSQL_DB_NAME" {
-#   type    = string
-#   default = "csye"
-# }
+variable "MYSQL_DB_NAME" {
+  type    = string
+  default = "csye"
+}
 
-# variable "TEST_MYSQL_DB_NAME" {
-#   type    = string
-#   default = "testdb"
-# }
+variable "TEST_MYSQL_DB_NAME" {
+  type    = string
+  default = "testdb"
+}
 
-# variable "PORT" {
-#   type    = string
-#   default = "3000"
-# }
+variable "PORT" {
+  type    = string
+  default = "3000"
+}

@@ -4,7 +4,7 @@
 sudo chown -R csye6225:csye6225 /etc/systemd/system/runApp.service
 
 # Restore SELinux context
-sudo restorecon -v /etc/systemd/system/runApp.service
+# sudo restorecon -v /etc/systemd/system/runApp.service
 
 sudo systemctl daemon-reload
 sudo systemctl enable runApp.service
