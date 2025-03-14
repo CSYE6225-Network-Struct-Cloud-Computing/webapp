@@ -58,7 +58,7 @@ jobs:
             - name: Fetch Latest Image
               run: |
                   image_id=$(gcloud asset search-all-resources --scope='projects/${{ secrets.PROJECT_ID }}' \
-                    --query='name:centos*' \
+                    --query='name:ubuntu*' \
                     --order-by='createTime desc' \
                     --asset-types='compute.googleapis.com/Image' \
                     --format='value(displayName)' \
