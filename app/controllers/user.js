@@ -1,6 +1,6 @@
 const { User } = require("../models");
 const bcrypt = require("bcrypt");
-const logger = require("../logs-app/index")
+const logger = require("../logs-app/index");
 const { publishMessage } = require("../pub_sub/index");
 const moment = require('moment');
 

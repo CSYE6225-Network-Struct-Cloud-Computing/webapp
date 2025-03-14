@@ -12,7 +12,6 @@ StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=csye6225
 EnvironmentFile=/home/csye6225/app/.env
-ExecStartPre=/usr/bin/sudo /usr/sbin/setsebool httpd_can_network_connect 1
 
 [Install]
 WantedBy=multi-user.target
