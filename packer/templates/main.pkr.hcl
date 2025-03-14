@@ -25,7 +25,7 @@ build {
   sources = ["source.googlecompute.centos"]
 
   provisioner "shell" {
-    script = "./scripts/update.sh" 
+    script = "./scripts/update.sh"
   }
 
   provisioner "shell" {
@@ -58,7 +58,7 @@ build {
   provisioner "shell" {
     script = "./scripts/configureOpsAgent.sh"
   }
-  
+
   # Comment as we are doing this in terraform 
   # provisioner "shell" {
   #   script           = "./scripts/createEnv.sh"

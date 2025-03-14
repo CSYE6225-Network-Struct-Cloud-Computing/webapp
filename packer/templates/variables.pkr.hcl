@@ -23,13 +23,13 @@ variable "machine_type" {
 }
 
 variable "MYSQL_USERNAME" {
-   type    = string
-   default = "csye"
+  type    = string
+  default = "csye"
 }
 
 variable "MYSQL_PASSWORD" {
-   type = string
-   default = "Pass@1234"
+  type    = string
+  default = "Pass@1234"
 }
 
 variable "MYSQL_DB_NAME" {
