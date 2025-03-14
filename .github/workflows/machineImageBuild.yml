@@ -107,7 +107,7 @@ jobs:
                     --scopes=https://www.googleapis.com/auth/cloud-platform \
                     --region=${{ secrets.REGION }} \
                     --tags=${{ secrets.TAGS }} \
-                    --create-disk=auto-delete=yes,boot=yes,device-name=persistent-disk-0,image=projects/${{ secrets.PROJECT_ID }}/global/images/$image_id,kms-key=projects/${{ secrets.PROJECT_ID }}/locations/${{ secrets.REGION }}/keyRings/${{ secrets.KEYRING_NAME }}/cryptoKeys/${{ secrets.VM_CRYPTO_KEY }},mode=rw,size=20,type=pd-standard \
+                    --create-disk=auto-delete=yes,boot=yes,device-name=persistent-disk-0,image=projects/${{ secrets.PROJECT_ID }}/global/images/$image_id,mode=rw,size=20,type=pd-standard \
                     --no-shielded-secure-boot \
                     --no-shielded-vtpm \
                     --no-shielded-integrity-monitoring \
